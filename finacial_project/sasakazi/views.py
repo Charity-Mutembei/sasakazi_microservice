@@ -16,11 +16,23 @@ class CustomerListCreateAPIView(APIView):
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
         else:
             return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request, id=None):
+        if id:
+            customer = Customer.objects.get(id=id)
+            serializer = CustomerSerializer(customer)
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
 
-# class CustomerRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Customer.objects.all()
-#     serializer_class = CustomerSerializer
+        customers = Customer.objects.all()
+        serializer = CustomerSerializer(customers, many=True)
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+
+
+
+
+   
+
 
 # class AccountListCreateAPIView(generics.ListCreateAPIView):
 #     queryset = Accounts.objects.all()
