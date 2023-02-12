@@ -13,8 +13,6 @@ class Customer (models.Model):
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    card_number = models.ManyToManyField(Cards, on_delete=models.Protect)
-
     
     # chose to return the name of the customer 
     def __str__(self):
@@ -41,8 +39,8 @@ class Accounts(models.Model):
       
 
     account_holder = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    account_type = models.CharField(max_length=30, choices=Account, default=Account.Debit)
-    account_balance = models.IntegerField(max_length=1000000000000000000000)
+    account_type = models.CharField(max_length=30, choices=Account,  default='Debit')
+    account_balance = models.IntegerField(null=False, blank=False)
 
 
     # chose to return the type of the account when saving
