@@ -27,25 +27,49 @@ class CustomerListCreateAPIView(APIView):
         customers = Customer.objects.all()
         serializer = CustomerSerializer(customers, many=True)
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+  
+
+
+class AccountListCreateAPIView(APIView):
+    def post(self, request):
+        serializer = AccountsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, id=None):
+        if id:
+            account = Accounts.objects.get(id=id)
+            serializer = AccountsSerializer(account)
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+
+        accounts = Accounts.objects.all()
+        serializer = AccountsSerializer(accounts, many=True)
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+
+
+class CardListCreateAPIView(APIView):
+    def post(self, request):
+        serializer = CardsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    
+    def get(self, request, id=None):
+        if id:
+            card = Cards.objects.get(id=id)
+            serializer = CardsSerializer(card)
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        
+        cards = Cards.objects.all()
+        serializer = CardsSerializer(cards, many=True)
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
 
 
-
-   
-
-
-# class AccountListCreateAPIView(generics.ListCreateAPIView):
-#     queryset = Accounts.objects.all()
-#     serializer_class = AccountsSerializer
-
-# class AccountRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Accounts.objects.all()
-#     serializer_class = AccountsSerializer
-
-# class CardListCreateAPIView(generics.ListCreateAPIView):
-#     queryset = Cards.objects.all()
-#     serializer_class = CardsSerializer
-
-# class CardRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Cards.objects.all()
-#     serializer_class = CardsSerializer
+            
