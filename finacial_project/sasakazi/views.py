@@ -14,10 +14,17 @@ def home(request):
     if request.method == 'POST':
         form = AccountForm(request.POST)
         form2 = CustomerForm(request.POST)
-        if all ([form.is_valid(), form2.is_valid()]):
-            form.save()
-            form2.save()
-            return HttpResponseRedirect('?submitted=True')
+
+        if request.method == 'POST':
+            form = AccountForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('?submitted=True')
+        if request.method == 'POST':
+            form2 = CustomerForm(request.POST)
+            if form2.is_valid():
+                form2.save()
+                return HttpResponseRedirect('?submitted=True')
 
     else:
         form = AccountForm
@@ -27,19 +34,6 @@ def home(request):
             submitted = True
     return render(request, 'home.html', {'form': form, 'form2': form2, 'submitted': submitted})
 
-# def customerapplication(request):
-#     submitted = False
-#     if request.method == 'POST':
-#         form = CustomerForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect('?submitted=True')
-#     else:
-#         form = CustomerForm
-#         if 'submitted' in request.GET:
-#             submitted = True
-    
-#     return render(request, 'home.html', {'form': form, 'submitted': submitted})
 
 
 class CustomerListCreateAPIView(APIView):
