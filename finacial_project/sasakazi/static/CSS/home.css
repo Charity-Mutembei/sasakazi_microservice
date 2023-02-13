@@ -38,8 +38,8 @@ body{
 }
 /* how to have the hover effect in react js css */
 .section_links #link:hover{
-    background-color: rgba(102, 95, 239, 0.2);
-    color: rgba(121, 62, 245, 1);
+    background-color: #90EE90;
+    color: black;
     cursor: pointer;
     border-radius: 1vw;
     font-size: 1vw;
@@ -58,7 +58,7 @@ body{
 .bottom_profile a svg {
     margin-right: 1vw;
     font-size: 5vw;
-    color: #E2E6EB;
+    color: #90EE90;
 }
 .bottom_profile {
     margin-top: 14vw;
@@ -81,15 +81,15 @@ p {
     letter-spacing: .2vw;
 }
 button {
-    background-color: #793EF5;
-    border: solid #793EF5;
+    background-color: #90EE90;
+    border: solid #90EE90;
     display: flex;
     margin-top: 1vw;
     font-family: 'Poppins', sans-serif;
     width: 15vw;
     height: 2.5vw;
     border-radius: .5vw;
-    color: #ffff;
+    color: black;
 }
 a{
     text-decoration: none;
@@ -107,3 +107,19 @@ span {
     font-size: 1vw;
     margin-top: .3vw;
 }
+
+
+/* form section */
+input.form_button{
+    background-color: #90EE90;
+    color: black;
+    font-size: 1vw;
+    border: none;
+    width: 10vw;
+    height: 2vw;
+    border-radius: .5vw;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+/* potential application */

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse 
+from django.http import HttpResponse, HttpResponseRedirect 
 from rest_framework.views import APIView 
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,8 +10,18 @@ from .forms import AccountForm
 # Create your views here.
 
 def home(request):
-    
-    return render(request, 'home.html')
+    submitted = False
+    if request.method == 'POST':
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('?submitted=True')
+
+    else:
+        form = AccountForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'home.html', {'form': form, 'submitted': submitted})
 
 
 class CustomerListCreateAPIView(APIView):

@@ -13,6 +13,10 @@ class Customer (models.Model):
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    email = models.EmailField('Email Address', blank=True, null=False)
+    phone_number = models.CharField(max_length=10, null=False, blank=True)
+    age_number = models.IntegerField(null=False, blank=False, default='18')
+    location = models.CharField(max_length=100, blank=True, null=False)
     
     # chose to return the name of the customer 
     def __str__(self):
