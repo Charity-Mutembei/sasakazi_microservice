@@ -10,3 +10,9 @@ class AccountForm(ModelForm):
         fields = (
             'account_holder', 'account_type', 'account_balance'
         )
+
+
+class CustomerForm(ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'

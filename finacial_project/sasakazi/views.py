@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Customer, Accounts, Cards 
 from .serializers import CustomerSerializer, AccountsSerializer, CardsSerializer
-from .forms import AccountForm
+from .forms import AccountForm, CustomerForm
 
 # Create your views here.
 
@@ -13,15 +13,33 @@ def home(request):
     submitted = False
     if request.method == 'POST':
         form = AccountForm(request.POST)
-        if form.is_valid():
+        form2 = CustomerForm(request.POST)
+        if all ([form.is_valid(), form2.is_valid()]):
             form.save()
+            form2.save()
             return HttpResponseRedirect('?submitted=True')
 
     else:
         form = AccountForm
+        form2 = CustomerForm
+
         if 'submitted' in request.GET:
             submitted = True
-    return render(request, 'home.html', {'form': form, 'submitted': submitted})
+    return render(request, 'home.html', {'form': form, 'form2': form2, 'submitted': submitted})
+
+# def customerapplication(request):
+#     submitted = False
+#     if request.method == 'POST':
+#         form = CustomerForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect('?submitted=True')
+#     else:
+#         form = CustomerForm
+#         if 'submitted' in request.GET:
+#             submitted = True
+    
+#     return render(request, 'home.html', {'form': form, 'submitted': submitted})
 
 
 class CustomerListCreateAPIView(APIView):
