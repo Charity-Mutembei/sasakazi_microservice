@@ -5,8 +5,14 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Customer, Accounts, Cards 
 from .serializers import CustomerSerializer, AccountsSerializer, CardsSerializer
+from .forms import AccountForm
 
 # Create your views here.
+
+def home(request):
+    
+    return render(request, 'home.html')
+
 
 class CustomerListCreateAPIView(APIView):
     def post(self, request):

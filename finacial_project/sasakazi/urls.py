@@ -3,8 +3,10 @@ from .views import (
     CustomerListCreateAPIView,
     AccountListCreateAPIView,
     CardListCreateAPIView,
+    home
 )
 urlpatterns=[
+    path('', home),
     path('customers/', CustomerListCreateAPIView.as_view(), name='customer-list-create'),
     path('customer/<int:id>', CustomerListCreateAPIView.as_view(), name='cutomer-id'),
     path('accounts/', AccountListCreateAPIView.as_view(), name='account-list-create'),
@@ -13,3 +15,4 @@ urlpatterns=[
     path('cards/<int:pk>/', CardListCreateAPIView.as_view(), name='card-retrieve-update-destroy'),
     
 ]
+
